@@ -2,13 +2,17 @@
 {% load static %}
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script> 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.7/jquery.validate.min.js"></script>
 <script type="text/javascript" src="{% static 'js\script.js' %}"></script>
-<link rel="stylesheet" href="{% static 'css\style.css' %}">
+
 <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 <!-- CSS only -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
 integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+<link rel="stylesheet" href="{% static 'css\style.css' %}">
 
 <body>
 
@@ -16,39 +20,38 @@ integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmV
         <h1>Register</h1>
         <!-- One "tab" for each step in the form: -->
         <div class="tab">Personal Info:
-            <p><input placeholder="First name..." oninput="this.className = ''" name="fname"></p>
+            <p><input placeholder="First name..." oninput="this.className = ''" name="fname" ></p>
             <p><input placeholder="Last name..." oninput="this.className = ''" name="lname"></p>
-            <p><input placeholder="E-mail..." oninput="this.className = ''" name="email1"></p>
-            <p><input placeholder="Password..." oninput="this.className = ''" name="pword" type="password"></p>
-            <p><input placeholder="Confirm Password..." oninput="this.className = ''" name="cpword" type="password"></p>
+            <p><input placeholder="E-mail..." oninput="this.className = ''" name="email"></p>
+            <p><input placeholder="Password..." oninput="this.className = ''" name="password" type="password"></p>
+            <p><input placeholder="Confirm Password..." oninput="this.className = ''" name="cpassword" type="password"></p>
         </div>
         <div class="tab">Basic Info:
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" oninput="this.className = ''" id="inlineRadio1" value="option1">
-                <label class="form-check-label" for="inlineRadio1">Male</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" oninput="this.className = ''" id="inlineRadio2" value="option2">
-                <label class="form-check-label" for="inlineRadio2">Female</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" oninput="this.className = ''" id="inlineRadio3" value="option2">
-                <label class="form-check-label" for="inlineRadio3">Other</label>
-              </div>
-            <p><input type="date" placeholder="dd-mm-yyyy" name="bd" id="bdate" onchange="calculateage()" oninput="this.className = ''" max="2022-07-31"></p>
-            <!-- <fieldset disabled> -->
-                <div class="form-group">
-                  <label for="age">Age</label>
-                  <input type="text" id="age" class="form-control" onmouseleave="setage()" oninput="this.className = ''" placeholder="Age" value="">
+            
+                <br/>
+                <div class='container'>
+                <!-- <lable><input type="radio" name="gender" oninput="this.className = ''" value="male"/>Male</lable>
+                <lable><input type="radio" name="gender" oninput="this.className = ''" value="female"/>Female</lable>
+                <label><input type="radio" name="gender" oninput="this.className = ''" value="other"/>Other</label> -->
+                <input type="radio" id="1" name="Gender" value="Male"><label for="1">Male</label>
+                <br>
+                <input type="radio" id="2" name="Gender" value="Female"><label for="2">Female</label>
+                <br>
+                <input type="radio" id="3" name="Gender" value="Other"><label for="3">Other</label>
+                <span id="genderError"></span>
                 </div>
-            <!-- </fieldset> -->
+            <p><input type="date" placeholder="dd-mm-yyyy" name="birthdate" id="bdate" onchange="calculateage()" oninput="this.className = ''" max=""></p>
+            <p><label for="age">Age</label>
+                <input type="number" id="age" class="form-control"  oninput="this.className = ''" placeholder="Age" value="" min="0" disabled><span id="ageError"></span>
+            </p>
+           
         </div>
         <div class="tab">Contact Info:
-            <p><input type="text" placeholder="Address..." oninput="this.className = ''" name="add"></p>
-            <!-- <div class="form-group">
-                <label for="exampleFormControlTextarea1">Example textarea</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-              </div> -->
+            <!-- <p><input type="text" placeholder="Address..." oninput="this.className = ''" name="add"></p> -->
+            <div class="form-group">
+                <label for="address">Address..</label>
+                <input type="text" oninput="this.className = ''" id="address" rows="3">
+            </div>
             
             <label>Country:<select class="form-select" name="country" id="country">
                   <option value="" selected="selected">Select country</option>
@@ -70,16 +73,49 @@ integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmV
 
         </div>
         <div class="tab">Hobbies Info:
-            <p><input placeholder="Username..." oninput="this.className = ''" name="uname"></p>
-            <select class="form-check-input">
-                <option selected>Known Language</option>
-                <option value="1">English</option>
-                <option value="2">Hindi</option>
-                <option value="3">Gujarati</option>
-                <option value="4">Marathi</option>
-                <option value="5">Tamil</option>
-                <option value="6">Bangali</option>
-              </select>
+            <!-- <p><input placeholder="Username..." oninput="this.className = ''" name="uname"></p> -->
+            <p>
+                <h2>Select known languages</h2>
+                <input type="checkbox" name="languages" value="English">
+                <label>English</label><br>
+                <input type="checkbox" name="languages" value="Hindi">
+                <label>Hindi</label><br>
+                <input type="checkbox" name="languages" value="Gujarati">
+                <label>Gujarati</label><br>
+                <input type="checkbox" name="languages" value="Marathi">
+                <label>Marathi</label><br>
+                <input type="checkbox" name="languages" value="Tamil">
+                <label>Tamil</label><br>
+                <input type="checkbox" name="languages" value="Bangali">
+                <label>Bangali</label><br>
+                <input type="checkbox" name="languages" value="Telugu">
+                <label>Telugu</label><br>
+                <button id="checkall">Select All</button>
+                
+
+            </p>
+            <p>
+                <h2>Favourite Places to visit</h2>
+                <input type="search" placeholder="Search" id="search">
+                <label>Mumbai</label>
+                <input type="checkbox" name="languages" value="Mumbai">
+                <br>
+                <label>Pune</label>
+                <input type="checkbox" name="languages" value="Pune">
+                <br>
+                <label>Kerela</label>
+                <input type="checkbox" name="languages" value="Kerela">
+                <br>
+                <label>Himachal</label>
+                <input type="checkbox" name="languages" value="Himachal">
+                <br>
+                <label>Kashmir</label>
+                <input type="checkbox" name="languages" value="Kashmir">
+                <br>
+                <label>Rajasthan</label>
+                <input type="checkbox" name="languages" value="Rajasthan">
+                <br>
+            </p>
             <!-- <p><input placeholder="Password..." oninput="this.className = ''" name="pword" type="password"></p> -->
         </div>
         <div style="overflow:auto;">
@@ -143,8 +179,13 @@ function validateForm() {
     var x, y, i, valid = true;
     x = document.getElementsByClassName("tab");
     y = x[currentTab].getElementsByTagName("input");
+    console.log("y",y)
+    console.log("x",x)
+    
     // A loop that checks every input field in the current tab:
     for (i = 0; i < y.length; i++) {
+        
+        console.log("y[i]",y[i])
         // If a field is empty...
         if (y[i].value == "") {
             // add an "invalid" class to the field:
@@ -152,10 +193,25 @@ function validateForm() {
             // and set the current valid status to false
             valid = false;
         }
+        // if(y[i].type=='radio'){
+        //     console.log(y[i].checked)
+        //     if(y[i].checked == true){
+        //         document.getElementById('genderError').innerHTML = '';
+        //         y[i].className = 'valid';
+        //         valid = true;
+        //         break;
+            
+        //     }
+        //     else{
+        //         y[i].className += " invalid";
+        //     document.getElementById('genderError').innerHTML = '<br> Please select atleast one.';
+        //     valid = false;
+        //     }
+        // }
     }
     // If the valid status is true, mark the step as finished and valid:
     if (valid) {
-        document.getElementsByClassName("step")[currentTab].className += " finish";
+    document.getElementsByClassName("step")[currentTab].className += " finish";
     }
     return valid; // return the valid status
 }
@@ -170,30 +226,47 @@ function fixStepIndicator(n) {
     x[n].className += " active";
 }
 
+
+
+const today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; 
+var yyyy = today.getFullYear();
+if(dd<10){
+  dd='0'+dd
+} 
+if(mm<10){
+  mm='0'+mm
+} 
+settoday = yyyy+'-'+mm+'-'+dd;
+document.getElementById("bdate").setAttribute("max", settoday);
+
+
 function calculateage(){
-    var today = new Date();
-    console.log("today",today)
+    // var today = new Date();
+    // console.log("today",today)
     var date = document.getElementById("bdate");
     // console.log("date",date.value);
     var birthDate = new Date(date.value);
-    console.log('birthDate',birthDate)
+    // console.log('birthDate',birthDate)
     var age = today.getFullYear() - birthDate.getFullYear();
     var m = today.getMonth() - birthDate.getMonth();
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
         age--;
     }
     console.log("age",age)
-    return age;
+    // return age;
+    document.getElementById("age").setAttribute("value", age);
 }
 
 
-function setage(){
-    console.log("setage")
-    document.getElementById("age").setAttribute("value", calculateage())
-}
+// function setage(){
+//     console.log("setage")
+//     document.getElementById("age").setAttribute("value", calculateage())
+// }
 var stateSel = $("#state")
 
-$('#country').on("change", function () {
+$('#country').change( function () {
 
 stateSel.empty()
 
@@ -203,7 +276,6 @@ stateSel.append($("<option></option>")
 
 // Ajax call for select states by country id........................................
 var selectedCountry = $('#country').val()
-console.log("Selected Country Id:", selectedCountry)
 var request = $.ajax({
   url: 'http://127.0.0.1:8000/form/state',
   type: 'GET',
@@ -226,7 +298,121 @@ var request = $.ajax({
   }
 });
 });
-console.log("Selected State Id:",  $('#state').val())
+
+// $("form").multiStepForm();
+// // with callback
+// $("form").multiStepForm({
+  
+//   callback : function(){
+//     console.log("save");
+//   }
+// });
+
+jQuery.validator.addMethod("accept", function(value, element, param) {
+  return value.match(new RegExp("." + param + "$"));
+});
+
+
+ var v = $("#regForm").validate({
+  // Specify validation rules
+  rules: {
+    fname: {
+        required: true,
+        minlength: 3,
+        accept: "[a-zA-Z]+" 
+    },
+    lname: {
+        required: true,
+        accept: "[a-zA-Z]" 
+    },
+    email: {
+          required: true,
+          email: true
+        },
+  password:{
+    required:true,
+    minlength:8,
+    maxlength:16,
+  },
+  cpassword: {
+    required: true,
+    equalTo: '[name="password"]',
+  },
+  Gender:{ required: true },
+  errorClass: "error fail-alert",
+  validClass: "valid success-alert",
+
+},
+  // Specify validation error messages
+  messages: {
+    fname:{
+        required: "First name is required",
+        minlength: "Name should be minimum 3 characters",
+        accept: "Only alphabets are allowed",
+    },
+    lname:{
+        required: "Last name is required",
+        accept: "Only alphabets are allowed",
+    },
+    email: {
+        required:   "Email is required",
+        email:    "Please enter a valid e-mail",
+    },
+    password:{
+        required:   "Password is required",
+        minlength:  "Password should be minimum 8 characters",
+        maxlength:  "Password should be maximum 16 characters",
+    },
+    cpassword: {
+        required:   "Confirm Password is required",
+        equalTo: "Confirm Password does not match with Password",
+    },
+    Gender:{
+        required: "Please select atleast one option",
+    }
+  },
+  errorPlacement: function(error, element) 
+        {
+            if ( element.is(":radio") ) 
+            {
+                error.appendTo( element.parents('.container') );
+            }
+            else 
+            { // This is the default behavior 
+                error.insertAfter( element );
+            }
+         }
+});
+// $("form").multiStepForm({
+//   validations:val
+// });
+
+// var searchBox = document.getElementById('search')
+// var searchData = searchBox.value.toUpperCase();
+//         var tableSearch = document.getElementById('table');
+//         var all = tableSearch.getElementsByTagName('tr');
+        
+//         for(var i=0;i < all.length; i++){
+//             var address_column = all[i].getElementsByTagName('td');
+//             for(var j = 0 ; j<address_column.length; j++){
+//                 if(address_column[j]){
+//                     var address_value = address_column[j].innerHTML || address_column[j].textContent; 
+//                     address_value = address_value.toUpperCase();
+//                     if(address_value.indexOf(searchData) > -1){
+//                         all[i].style.display = '';
+                    
+//                         break;
+//                     }
+//                     else{
+//                         all[i].style.display = 'none';
+//                     }
+//                 }
+//             }
+        
+//         }
+
+
+
     </script>
 
 </body>
