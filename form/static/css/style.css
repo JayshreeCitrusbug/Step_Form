@@ -39,15 +39,50 @@ input[type=radio]+label{
     color: #0026ff;
 }
 
+textarea {
+    padding: 10px;
+    width: 100%;
+    font-size: 17px;
+    font-family: Raleway;
+    border: 1px solid #aaaaaa;
+}
+
+#country{ 
+    padding: 10px;
+    width: 100%;
+    font-size: 17px;
+}
+#state{ 
+    padding: 10px;
+    width: 100%;
+    font-size: 17px;
+    margin-bottom: 10px;
+}
+    
+#country:focus, #state:focus {
+    padding: 10px;
+    width: 100%;
+    font-size: 17px;
+}
 /* Mark input boxes that gets an error on validation: */
-#genderError{
+#genderError, #ageError, #countryError, #stateError{
     color: red;
 }
+/* #countryError{
+    color: red;
+}
+#stateError{
+    color: red;
+} */
 input[type=radio].invalid{
     color: burlywood;
     background-color: #ffdddd;
 }
 input.invalid {
+    background-color: #ffdddd;
+}
+
+textarea.invalid {
     background-color: #ffdddd;
 }
 
